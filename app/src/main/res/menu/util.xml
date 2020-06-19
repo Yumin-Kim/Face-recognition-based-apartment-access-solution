@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_call"
+        android:orderInCategory="100"
+        android:title="전화 걸기"
+        
+        />
+    <item
+        android:id="@+id/menu_Tomap"
+        android:orderInCategory="100"
+        android:title="지도보기"
+        />
+    <item
+        android:id="@+id/menu_check_list"
+        android:orderInCategory="100"
+        android:title="연락처 보기"
+        />
+</menu>
