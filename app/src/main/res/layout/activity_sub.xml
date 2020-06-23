@@ -16,20 +16,31 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ListView_Tab1" />
+            android:text="ListView_Tab1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/textline"/>
 
         <Button
             android:id="@+id/btn_fragmentB"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Recycle_Tab2" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+
+            android:text="Recycle_Tab2"
+            android:background="@drawable/textline"/>
         <Button
             android:id="@+id/btn_fragmentC"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Util_Tab3" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+
+            android:text="Util_Tab3"
+            android:background="@drawable/textline"/>
 
 </LinearLayout>
     <FrameLayout

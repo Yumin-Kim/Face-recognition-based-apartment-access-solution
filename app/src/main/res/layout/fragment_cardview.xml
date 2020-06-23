@@ -13,35 +13,33 @@
         android:layout_marginBottom="10dp"
         app:cardCornerRadius="5dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:orientation="vertical"
-            android:layout_margin="40dp"
             >
 
             <ImageView
                 android:id="@+id/image"
+                android:background="#60000000"
                 android:layout_gravity="center"
-                android:layout_width="355dp"
-                android:layout_height="210dp" />
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                />
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignLeft="@+id/image"
-                android:layout_alignTop="@+id/image"
-                android:layout_alignRight="@+id/image"
-                android:layout_alignBottom="@+id/image"
-                android:layout_margin="1dp"
+                android:layout_height="30dp"
                 android:gravity="center"
-                android:padding="10dp"
-                android:textSize="20dp"
-                android:textFontWeight="@android:integer/config_mediumAnimTime"
-                android:background="#29b6f6"
+                android:background="#70000000"
                 android:textColor="#ffffff"
-                android:text="test" />
-        </LinearLayout>
+                android:text="test"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>
