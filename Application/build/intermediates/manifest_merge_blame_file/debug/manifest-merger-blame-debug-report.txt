@@ -1,0 +1,72 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.android.bluetoothlegatt"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="18"
+8-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="27" />
+9-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.BLUETOOTH" />
+11-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:9:5-67
+11-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:9:22-65
+12    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+12-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:10:5-73
+12-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:10:22-71
+13    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+13-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:11:5-79
+13-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:11:22-76
+14    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+14-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:12:5-81
+14-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:12:22-78
+15
+16    <uses-feature
+16-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:13:5-89
+17        android:name="android.hardware.bluetooth_le"
+17-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:13:19-63
+18        android:required="true" />
+18-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:13:64-87
+19
+20    <application
+20-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:15:5-27:19
+21        android:debuggable="true"
+22        android:icon="@drawable/ic_launcher"
+22-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:16:9-45
+23        android:label="@string/app_name"
+23-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:15:18-50
+24        android:testOnly="true"
+25        android:theme="@android:style/Theme.Holo.Light" >
+25-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:17:9-56
+26        <activity
+26-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:18:9-24:20
+27            android:name="com.example.android.bluetoothlegatt.DeviceScanActivity"
+27-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:18:19-53
+28            android:label="@string/app_name" >
+28-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:19:13-45
+29            <intent-filter>
+29-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:20:13-23:29
+30                <action android:name="android.intent.action.MAIN" />
+30-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:21:17-68
+30-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:21:25-66
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:22:17-76
+32-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:22:27-74
+33            </intent-filter>
+34        </activity>
+35        <activity android:name="com.example.android.bluetoothlegatt.DeviceControlActivity" />
+35-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:25:9-58
+35-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:25:19-56
+36
+37        <service
+37-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:26:9-77
+38            android:name="com.example.android.bluetoothlegatt.BluetoothLeService"
+38-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:26:18-52
+39            android:enabled="true" />
+39-->C:\android\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:26:53-75
+40    </application>
+41
+42</manifest>
