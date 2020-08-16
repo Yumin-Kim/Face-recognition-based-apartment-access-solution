@@ -49,12 +49,25 @@
                   android:text="@string/disconnected"
                   android:textSize="18sp"/>
     </LinearLayout>
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:onClick="setData"
-        android:text="send Data"
+        android:orientation="horizontal">
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:onClick="TurnOn"
+        android:text="Turn On"
         />
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:onClick="TurnOff"
+        android:text="Turn off"
+        />
+    </LinearLayout>
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"

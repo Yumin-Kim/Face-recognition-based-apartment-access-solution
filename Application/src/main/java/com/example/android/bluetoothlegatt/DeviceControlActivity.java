@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -35,6 +36,7 @@ import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -96,8 +98,12 @@ public class DeviceControlActivity extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) { // bluetoothLeService에서 sendBrodcast를 했을때 호출
             final String action = intent.getAction();
+            Log.v("DeBUD",context.toString());
+            Log.v("DeBUD",intent.toString());
+
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
                 mConnected = true;
+                Log.v("DEBUD","GATT ACTION_GATT_CONNECTED ");
                 updateConnectionState(R.string.connected); // 연결되었음 표현
                 invalidateOptionsMenu(); // onCreateOptionsMenu 호출
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
@@ -106,9 +112,12 @@ public class DeviceControlActivity extends Activity {
                 invalidateOptionsMenu();
                 clearUI();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) { // GATTSerive 발견
+                Log.v("DEBUD","GATT SERVice Discovered");
                 // Show all the supported services and characteristics on the user interface.
+                Log.v("DEBUD","\n"+mBluetoothLeService.getSupportedGattServices().toString());
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) { // BLE 장치에서 받은 데이터가 사용가능
+                Log.v("DEBUD","Display method Start ");
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
@@ -142,6 +151,7 @@ public class DeviceControlActivity extends Activity {
                             mBluetoothLeService.setCharacteristicNotification(
                                     characteristic, true);
                         }
+                        mBluetoothLeService.enableTXNotification();
                         return true;
                     }
                     return false;
@@ -228,6 +238,7 @@ public class DeviceControlActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    //connection BLE method
     private void updateConnectionState(final int resourceId) {
         runOnUiThread(new Runnable() {
             @Override
@@ -260,6 +271,7 @@ public class DeviceControlActivity extends Activity {
         for (BluetoothGattService gattService : gattServices) {
             HashMap<String, String> currentServiceData = new HashMap<String, String>();
             uuid = gattService.getUuid().toString();
+            Log.v("DEBUD","UUID : "+uuid);
             currentServiceData.put(
                     LIST_NAME, SampleGattAttributes.lookup(uuid, unknownServiceString));
             currentServiceData.put(LIST_UUID, uuid);
@@ -309,8 +321,20 @@ public class DeviceControlActivity extends Activity {
         return intentFilter;
     }
 
-    byte [] data = {32};
-    public void setData(View view) {
-        mBluetoothLeService.write(mNotifyCharacteristic,data);
+
+    public void TurnOff(View view) throws UnsupportedEncodingException {
+        String data = "2";
+        if(mBluetoothLeService == null)  Log.v("DEBUD","NULL입니다");
+        byte value [];
+        value = data.getBytes("UTF-8");
+        mBluetoothLeService.writeRXCharacteristic(value);
+    }
+
+    public void TurnOn(View view) throws UnsupportedEncodingException {
+        String data = "1";
+        if(mBluetoothLeService == null)  Log.v("DEBUD","NULL입니다");
+        byte value [];
+        value = data.getBytes("UTF-8");
+        mBluetoothLeService.writeRXCharacteristic(value);
     }
 }
