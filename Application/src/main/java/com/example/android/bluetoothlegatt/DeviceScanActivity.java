@@ -27,7 +27,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -40,9 +40,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import android.Manifest;
+
 import android.os.Build;
-import android.util.Log;
+
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
  */
