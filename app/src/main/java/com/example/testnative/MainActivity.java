@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity
         if (matResult == null)
 
             matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
-
+    Log.v(TAG , "OnCamreaFrame"+inputFrame.toString());
         //ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
         Core.flip(matInput, matInput, 1);
 
