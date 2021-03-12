@@ -56,7 +56,9 @@
 
 <!-- ![DB설계]() -->
 
-<img src="/MarkupImage/workspace.jpg" width="40%" height="30%" title="MysqlWorkSpaceImage" alt="MysqlWorkSpaceImage"></img>
+![MysqlWorkSpaceImage](./MarkupImage/workspace.jpg)
+
+<img src="./MarkupImage/workspace.jpg" width="40%" height="30%" title="MysqlWorkSpaceImage" alt="MysqlWorkSpaceImage"></img>
 
 ---
 
