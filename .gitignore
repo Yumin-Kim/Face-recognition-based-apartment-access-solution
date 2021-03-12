@@ -1,0 +1,4 @@
+config.py
+*.jpg
+*.png
+__pycache__
