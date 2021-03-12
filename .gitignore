@@ -1,4 +1,4 @@
 config.py
-*.jpg
-*.png
+/data/*.jpg
+/data/*.png
 __pycache__

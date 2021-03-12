@@ -29,14 +29,20 @@
 
 - Front(React Dashboard Template 활용)
   - SSR 예정 없음
+  * 실시간으로 모니터링 가능하게 구현
 
 ## RestAPI 설계(간단한 설계)
 
 - /admin(관리자를 위한 URL)
+
   - 조회
   - 삭제
   - 변경
   - 추가
+    - (POST) /Image/:teacher/:group (이미지 추가)
+      - teacher : 누구인지 DB 조회
+      - group : 원하는 그룹이 있는지 확인후 DB에 기록
+
 - /face(얼굴인식 위한 URL)
   - 얼굴 인식 비교
   - 수정중...
@@ -45,6 +51,12 @@
   - 삭제 (수업 , 정보)
   - 변경 (수업 , 정보)
   - 추가 (수업 , 정보)
+
+## DB 설계(Toy Project로 간단하게 구성)
+
+<!-- ![DB설계]() -->
+
+<img src="/MarkupImage/workspace.jpg" width="40%" height="30%" title="MysqlWorkSpaceImage" alt="MysqlWorkSpaceImage"></img>
 
 ---
 
