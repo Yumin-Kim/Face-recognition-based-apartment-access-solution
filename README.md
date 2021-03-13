@@ -18,6 +18,23 @@
   - DB(mysql - pymysql)을 사용하여 연동
   - 향후 AI개발후 서비스를 개발할때 사용할 가능성이 높기 때문에 template만든다는 생각으로 개발
 
+  * 정적 파일 서빙
+    ```
+    /app.py
+    /templates
+      /index.html
+    /static
+      /images
+        /test01.jpg
+        /test02.jpg
+      /js
+        /test01.js
+        /test02.js
+    ```
+  * Dynamic URL path Node.js-(/:id) // Flask - (<타입:id>)
+  * Dynamic URL path Node.js-req.query.id // Flask - (request.args/get("id"))
+  * Front에 JSON 형태로 전송하기 떄문에 JSON 데이터 정의 또한 필요 >> 함수로 모듈화
+
 * 파이썬 관련 메모
   - 해당 명령어를 통해 의존성 있는 Module을 확인 및 다운로드 받을 수 있다
   ```
@@ -57,8 +74,6 @@
 <!-- ![DB설계]() -->
 
 ![MysqlWorkSpaceImage](./MarkupImage/workspace.jpg)
-
-<img src="./MarkupImage/workspace.jpg" width="40%" height="30%" title="MysqlWorkSpaceImage" alt="MysqlWorkSpaceImage"></img>
 
 ---
 
