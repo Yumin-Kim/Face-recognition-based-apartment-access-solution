@@ -2,4 +2,5 @@
 # route안에 있는 todo를 사용하게다고 정의가 따로 필요
 from route.todo import Todo
 from route.admin import Admin
+from route.face import Face
 

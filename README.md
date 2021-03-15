@@ -50,20 +50,25 @@
 
 ## RestAPI 설계(간단한 설계)
 
-- /admin(관리자를 위한 URL)
+- 관리(CRUD)가 된닫고 칭함
 
-  - 조회
-  - 삭제
-  - 변경
-  - 추가
-    - (POST) /Image/:teacher/:group (이미지 추가)
-      - teacher : 누구인지 DB 조회
-      - group : 원하는 그룹이 있는지 확인후 DB에 기록
+* /admin(관리자를 위한 URL)
 
-- /face(얼굴인식 위한 URL)
+- 관리자는 회원을 관리 및 실시간 모니터링 가능하게
+  - /user
+    - [Get]/
+      - 학생정보 조회
+    - [Post]/create?user={userCode}&name={name}&
+      - 학생정보 등록
+    - [Patch]/patch?user={userCode}&수정요소추가
+      - 학생정보 수정
+    - [Delete]/delete?user={userCode}
+      - 학생정보 수정[Auto Increment주의]
+
+* /face(얼굴인식 위한 URL)
   - 얼굴 인식 비교
   - 수정중...
-- /user(사용자 정보 조회)
+* /user(사용자 정보 조회)
   - 조회 (수업 , 정보)
   - 삭제 (수업 , 정보)
   - 변경 (수업 , 정보)
@@ -76,6 +81,18 @@
 ![MysqlWorkSpaceImage](./MarkupImage/workspace.jpg)
 
 ---
+
+## Design Front Reponse JSON Data
+
+```
+{
+  data : {
+    usersData:[]
+    teachersData:
+    groupsData:
+  }
+}
+```
 
 # TODO List
 
@@ -108,9 +125,21 @@
 
   - 향후 보안(이미지 관련) 생각해보기
 
-2. 세부적인 로직 및 고려 사항
+---
 
-   - 출첵후 다시 출첵이 안되도록 부가적인 비즈니스 로직 설계
+2. 2021.03.14 **DB설계 에러 사항 및 JSON 데이터 분석 및 REST API재구축**
 
-   - Flask prod모드 변경 방법
-   - 실서비스를 위한 AWS >> 이미지 저장을 S3로 할거 고려하기
+###
+
+- 허슬한 REST API 구현하면서 주기적으로 수정
+- Front에 HTML으로 응답하지 않고 JSON데이터로 응답 필요
+- 사용자[학생 , 선생님] 회원가입 절차 생략됨
+- 얼굴 인식을 위한 이미지 인코딩 과정 어떤 부분에 추가할건지 생각
+- 현재 위와 같은 문제 계속 수정중
+
+### 세부적인 로직 및 고려 사항
+
+- 출첵후 다시 출첵이 안되도록 부가적인 비즈니스 로직 설계
+
+- Flask prod모드 변경 방법
+- 실서비스를 위한 AWS >> 이미지 저장을 S3로 할거 고려하기

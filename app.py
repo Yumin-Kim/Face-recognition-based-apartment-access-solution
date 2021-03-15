@@ -5,7 +5,7 @@ from flask_restx import Resource , Api , Namespace
 
 # Defined Module
 # import faceRecognition
-from route import Todo , Admin
+from route import Todo , Admin , Face
 app = Flask(__name__)
 
 #React[SPA]를 위한 Route >> Routing 되기전에 미리 Basic Route 선점
@@ -25,9 +25,9 @@ app.config["JSON_AS_ASCII"] = False
 
 # routing
 api.add_namespace(Todo , "/todos" )
-# api.add_namespace(Admin , "/face" )
+api.add_namespace(Face , "/face" )
 api.add_namespace(Admin , "/admin" )
 # api.add_namespace(Todo , "/user" )
 
 if __name__ == "__main__":
-	app.run(host="0.0.0.0", debug=True, port=5001)
+	app.run(host="0.0.0.0",threaded=True , debug=True, port=5001)

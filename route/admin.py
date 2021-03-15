@@ -3,7 +3,7 @@ from flask_restx import Resource, Api, Namespace
 from werkzeug.utils import secure_filename
 import config as database
 import os
-Admin = Namespace("admin")
+Admin = Namespace("Admin")
 
 db_class = database.Database()
 data = ""
@@ -13,7 +13,6 @@ data = ""
 # f.filename = "test.jpg"
 # 폴더 유무 체크
 # os.path.isdir("./static/%d" %group_id)
-
 
 def FindMiddlewareGroupFolder():
     sql = "SELECT * from groups"
@@ -30,7 +29,7 @@ class TodoPost(Resource):
     def get(self):
         sql = "SELECT * FROM users"
         row = db_class.execute_all(sql)
-        print(row)
+        print(data)
         return jsonify(row)
         
 @Admin.route("/image/")
@@ -42,12 +41,15 @@ class UploadHTML(Resource):
         return make_response(render_template("upload.html"),200,headers)
 
 #이미지 저장 path 보다는 querystring으로 db조회및 저장
+
+
 @Admin.route("/image/upload")
+@Admin.doc(params={'teacherId': '1','groupId': '2','userCode': '2016*****'})
 class UploadPost(Resource):
     def post(self):
         if request.method == "POST":
-            teacherId = request.args.get("teacher")
-            groupId = int(request.args.get("group"))
+            teacherId = request.args.get("teacherId")
+            groupId = int(request.args.get("groupId"))
             userCode = request.args.get("userCode")
             if 'file' not in request.files:
                 return jsonify({
