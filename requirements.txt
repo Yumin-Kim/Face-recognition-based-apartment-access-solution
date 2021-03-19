@@ -3,4 +3,3 @@ face_recognition
 Flask
 gunicorn 
 flask-restx
-numpy
