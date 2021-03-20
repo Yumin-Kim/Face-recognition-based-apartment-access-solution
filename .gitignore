@@ -2,6 +2,5 @@ config.py
 /data/*.jpg
 /data/*.png
 __pycache__
-*.jpg
 *.png
 static/images/*
