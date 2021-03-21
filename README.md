@@ -150,6 +150,9 @@
 - 현재 DB API JSON 데이터 설계후 시작하기
 - DB설계후 <a href="http://filldb.info/">Dummy Data</a>를 생성 할 수 있는 사이트입니다.
 
+5. 2021.03.21
+* 전반적인 DB설계를 종료후 RESTAPI설계 , JSON설계 진행
+
 ```
 아파트 관리 페이지
 [] 해당 테이블과 관계 이룸
