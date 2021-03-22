@@ -137,11 +137,14 @@
             * querystring {("limit":string , "offset":string) }
             * return Array<{id : int ,kind :string , carcode : string ,createdAt : string , users.name : string , group(group.Name) : string(Name) , groupByGroup(groupByGroup.name) : string }>
         * GET /filter
-            * querystring을 통한 챠량 정보 조회
-            * querystring (("carCode",string) , ("createdAt":stirng -> Date), ("kind",string) , ("group",string) , ("groupByGroup",string))
-            * if group.name으로
+            * querystring을 통한 하나요인으로 정보 조회(차량 번호 , 입력 날짜 , 차종 , 동 , 호 , 이름 )
+            * querystring (("carCode",string) , ("createdAt":stirng -> Date), ("kind",string) , ("group",string) , ("groupByGroup",string) , ("user" : string)) 
+            * Business Logic 
+                * 테이블 명에 해당하는 querystring을 통해 분기 처리
+                * if querystring 특정 테이블 명이라면 Join 이나 select사용
+            * return Array<>
         * GET /filter/multi
             * 차량정보 조회와 인원정보 동시 조회 
-            * querystring [(),()]
+            * querystring [("carCode" , string ),("")]
     ### WebSocket
     * 출입 여부 실시간 모니터링
