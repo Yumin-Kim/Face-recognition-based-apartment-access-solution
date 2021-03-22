@@ -45,7 +45,7 @@
                 * querystring 값을 통해 User 정보를 상한선을 지키며 groups,groupByGroup을 조인후 가지고 온다.(model)
                 * offset = 기준점
                 * limit = 출력할 행 숫자
-            * return { id: int , name : string , host : boolean , createdAt : Date , updatedAt : Date , deletedAt:Date , birth:Date , phoneNumber : string ,group.name:int,groupBygroup.name:int , groupBygroup.createdAt:Date }
+            * return Arrary<{ id: int , name : string , host : boolean , createdAt : Date , updatedAt : Date , deletedAt:Date , birth:Date , phoneNumber : string ,group.name:int,groupBygroup.name:int , groupBygroup.createdAt:Date }>
         * GET /human
             * 인원의 정보를 세밀하게 조회 할 수 있는 기능 , 조회는 누적으로 개발에 주의!!
             * querystring [("host",boolean) , ("memberIndex",int) , ("phoneNumber",string) , ("offset",int) , ("limit",int)]
@@ -60,8 +60,28 @@
             * Business Logic
                 * pathName을 통한 분리후 서로 다른 querystring을 통해 id 값 찾은 후 users와 join
         * GET /info/<human:string>/<room:string>
-            * 방 , 인원 세부정보 조회를 동시에 실행 할 시
-            * 동 >> 호 >> 인원 조인
+            * 동 또는 호 , 인원 세부정보 조회를 동시에 실행 할 시 
+            * Business Logic
+                * human 과 room을 확인후 table명을 분석 >> querystring >> columns값을 알아낸다
+                * querystring Groups {("minWeight",int),("name",int),("pricing",int),("roomCount",int),("offset",int) , ("limit",int)}
+                * querystring GroupByGroup {("name",int),("createdAt",int),("pricing",int),("offset",int) , ("limit",int)} 
+                * querystring users [("host",boolean) , ("memberIndex",int) , ("phoneNumber",string) , ("offset",int) , ("limit",int)]
+            * return 
+        * PATCH /changed
+            * 특정 정보를 선택하여 특정 부분을 수정 전 URL 기억후 다시 요청하여 
+            * querystring { ("id",int),("변경할 항목",그에 해당하는 값) }
+            * return {}
+        * DELETE /deleted
+            * 특정 정보 row 선택하여 삭제
+            * querystring {"id":int} id 
+            * Business Logic
+                * 해당 id값을 통해 컬럼 삭제
+                * 삭제 후 한 row 선택하여 
+        * GET /outter
+            * 외부 출입자 조회
+            * querystring (("offset",int),("limit",int))
+            * group 과 groupBygroup ,admin 테이블을 통해서 조인을 한 정보 전달 
+            * return Array{name : string , description : string , createdAt : Date , phoneNumber : string , group.name:int , groupByGroup.name:int }
         * GET /exit
             * 웹 소켓 활용 예정
 
