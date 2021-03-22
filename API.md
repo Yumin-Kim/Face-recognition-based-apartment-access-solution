@@ -40,26 +40,26 @@
 * /api
     * /user (인원 관리 카테고리) 이미지 관련 로직 여기서 처리
         * GET /?offset={}&limit={}
-            * 전반적인 회원 정보 가지고옴
+            * 전반적인 회원 정보 가지고옴 
             * Business Logic
                 * querystring 값을 통해 User 정보를 상한선을 지키며 groups,groupByGroup을 조인후 가지고 온다.(model)
                 * offset = 기준점
                 * limit = 출력할 행 숫자
-            * return Arrary<{ id: int , name : string , host : boolean , createdAt : Date , updatedAt : Date , deletedAt:Date , birth:Date , phoneNumber : string ,group.name:int,groupBygroup.name:int , groupBygroup.createdAt:Date }>
-        * GET /human
+            * return Array<{ id: int , name : string , host : boolean , createdAt : Date , updatedAt : Date , deletedAt:Date , birth:Date , phoneNumber : string ,group.name:int,groupBygroup.name:int , groupBygroup.createdAt:Date }>
+        * GET /filter/human
             * 인원의 정보를 세밀하게 조회 할 수 있는 기능 , 조회는 누적으로 개발에 주의!!
             * querystring [("host",boolean) , ("memberIndex",int) , ("phoneNumber",string) , ("offset",int) , ("limit",int)]
             * Business Logic 
                 * querystring에 담긴 데이터의 값을 기반으로 db조인
             * return {}
-        * GET /room/<detail:string>
+        * GET /filter/room/<detail:string>  
             * 방에 대한 정보를 통해 인원들 정보 조회
             * (self,detail) detail을 통해 테이블 명 전송 
             * querystring Groups >> {("minWeight",int),("name",int),("pricing",int),("roomCount",int),("offset",int) , ("limit",int)} 
             * querystring GroupsByGroup >> {("name",int),("createdAt",int),("pricing",int),("offset",int) , ("limit",int)} 
             * Business Logic
                 * pathName을 통한 분리후 서로 다른 querystring을 통해 id 값 찾은 후 users와 join
-        * GET /info/<human:string>/<room:string>
+        * GET /filter/info/<human:string>/<room:string>
             * 동 또는 호 , 인원 세부정보 조회를 동시에 실행 할 시 
             * Business Logic
                 * human 과 room을 확인후 table명을 분석 >> querystring >> columns값을 알아낸다
@@ -128,8 +128,20 @@
     * /voting (주민 투표 카테고리)
     * /petitions (민원 관리 센터 카테고리)
     * /facility (시설관리 카테고리)
+        
     * /pricing (관리비 고지 관리 카테고리)
+        * GET /
     * /usercar (차량 및 주차 관리)
-
+        * GET /
+            * 인원간 차량 조회
+            * querystring {("limit":string , "offset":string) }
+            * return Array<{id : int ,kind :string , carcode : string ,createdAt : string , users.name : string , group(group.Name) : string(Name) , groupByGroup(groupByGroup.name) : string }>
+        * GET /filter
+            * querystring을 통한 챠량 정보 조회
+            * querystring (("carCode",string) , ("createdAt":stirng -> Date), ("kind",string) , ("group",string) , ("groupByGroup",string))
+            * if group.name으로
+        * GET /filter/multi
+            * 차량정보 조회와 인원정보 동시 조회 
+            * querystring [(),()]
     ### WebSocket
     * 출입 여부 실시간 모니터링
