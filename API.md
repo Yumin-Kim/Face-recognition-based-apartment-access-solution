@@ -117,6 +117,7 @@ interface IVotingInfoTable extends ITableBasicInfo{
       - return
     - PATCH /changed
       - 특정 정보를 선택하여 특정 부분을 수정 전 URL 기억후 다시 요청하여
+      *
       - querystring { ("id",int),("변경할 항목",그에 해당하는 값) }
       - return {}
     - DELETE /deleted
@@ -142,6 +143,9 @@ interface IVotingInfoTable extends ITableBasicInfo{
     - GET /dashboard
       - 공지사항 정보
       - return {id:int , title : string , desciption : string , createdAt : Date , updatedAt : Date | NULL, deletedAt :Date | NULL , admin.name : string , admin.email:string}
+    * PATCH /dashboard
+    * DELETE /dashboard
+    * POST /dashboard
     - POST /login
       - 로그인
       - body(form) {email : string , password : string}
