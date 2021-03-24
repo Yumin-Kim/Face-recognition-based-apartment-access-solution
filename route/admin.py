@@ -73,7 +73,8 @@ class UploadPost(Resource):
                     db_class.commit()
                 else :
                     imageLength = imageData["data"]
-                    sql = "INSERT INTO images(name , userId , teacherId , imageIndex ) VALUES( %d , %d , %d ,%d  )" % (int(userData[1]["userCode"]) , userData[1]["id"] ,int(teacherId) ,imageLength )
+                    # print(userData[1]["userCode"] , userData[1]["id"] ,teacherId ,imageLength)
+                    sql = "INSERT INTO images(name , userId , teacherId , imageIndex ) VALUES( %d , %d , %d ,%d  )" % (int(userData[1]["userCode"]) , int(userData[1]["id"]) ,int(teacherId) ,imageLength )
                     db_class.execute(sql)
                     db_class.commit()
                     

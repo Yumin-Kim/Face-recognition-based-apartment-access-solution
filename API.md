@@ -50,16 +50,41 @@ Interface IUserBasicInfo{
   groupByGroup.name : int;
 }
 
-interface IUser_adminBasic extends IUserBasicInfo{
-  admin.name : string;
-}
-
 interface ITableBasicInfo{
+  id: int;
   title: string;
   description : string;
   createdAt : Date;
   updatedAt? : Null | Date;
   deletedAt? : NULL | Date;
+}
+
+  interface IGroupTable{
+    minWeight : int;
+    maxWeight : int;
+    roomCount : int;
+    pricing : int;
+  }
+
+  interface IGroupByGroupTable_mapping extends IGroupTable{
+    repairCount : int;
+    createdAt:Date; // 입주 날짜
+    updatedAt:Null|Date;
+    deletedAt:Null|Date;
+    housePassword:string;
+    pricing:int;
+  }
+
+  interface IUser_ReturnData extends IGroupByGroupTable_mapping{
+    memberIndex:int;
+    host : boolean;
+    birth:Date;
+    phoneNumber : string;
+  }
+
+
+interface IUser_adminBasic extends IUserBasicInfo{
+  admin.name : string;
 }
 
 interface IPetitionsTable extends ITableBasicInfo {
@@ -87,65 +112,87 @@ interface IVotingInfoTable extends ITableBasicInfo{
 
   - /user (인원 관리 카테고리) 이미지 관련 로직 여기서 처리
 
-    - GET /?offset={}&limit={}
-      - 전반적인 회원 정보 가지고옴
-      - Business Logic
-        - querystring 값을 통해 User 정보를 상한선을 지키며 groups,groupByGroup을 조인후 가지고 온다.(model)
-        - offset = 기준점
-        - limit = 출력할 행 숫자
-      - return Array<{ id: int , name : string , host : boolean , createdAt : Date , updatedAt : Date , deletedAt:Date , birth:Date , phoneNumber : string ,group.name:int,groupBygroup.name:int , groupBygroup.createdAt:Date }>
-    - GET /filter/human
-      - 인원의 정보를 세밀하게 조회 할 수 있는 기능 , 조회는 누적으로 개발에 주의!!
-      - querystring [("host",boolean) , ("memberIndex",int) , ("phoneNumber",string) , ("offset",int) , ("limit",int)]
-      - Business Logic
-        - querystring에 담긴 데이터의 값을 기반으로 db조인
-      - return {}
-    - GET /filter/room/< detail:string>
-      - 방에 대한 정보를 통해 인원들 정보 조회
-      - (self,detail) detail을 통해 테이블 명 전송
-      - querystring Groups >> {("minWeight",int),("name",int),("pricing",int),("roomCount",int),("offset",int) , ("limit",int)}
-      - querystring GroupsByGroup >> {("name",int),("createdAt",int),("pricing",int),("offset",int) , ("limit",int)}
-      - Business Logic
-        - pathName을 통한 분리후 서로 다른 querystring을 통해 id 값 찾은 후 users와 join
-    - GET /filter/info/< human:string>/< room:string>
-      - 동 또는 호 , 인원 세부정보 조회를 동시에 실행 할 시
-      - Business Logic
-        - human 과 room을 확인후 table명을 분석 >> querystring >> columns값을 알아낸다
-        - querystring Groups {("minWeight",int),("name",int),("pricing",int),("roomCount",int),("offset",int) , ("limit",int)}
-        - querystring GroupByGroup {("name",int),("createdAt",int),("pricing",int),("offset",int) , ("limit",int)}
-        - querystring users [("host",boolean) , ("memberIndex",int) , ("phoneNumber",string) , ("offset",int) , ("limit",int)]
-      - return
-    - PATCH /changed
-      - 특정 정보를 선택하여 특정 부분을 수정 전 URL 기억후 다시 요청하여
-      *
-      - querystring { ("id",int),("변경할 항목",그에 해당하는 값) }
-      - return {}
-    - DELETE /deleted
-      - 특정 정보 row 선택하여 삭제
-      - querystring {"id":int} id
-      - Business Logic
-        - 해당 id값을 통해 컬럼 삭제
-        - 삭제 후 한 row 선택하여
-    - GET /outter
-      - 외부 출입자 조회
-      - querystring (("offset",int),("limit",int))
-      - group 과 groupBygroup ,admin 테이블을 통해서 조인을 한 정보 전달
-      - return Array{name : string , description : string , createdAt : Date , phoneNumber : string , group.name:int , groupByGroup.name:int }
-    - GET /exit
-      - 웹 소켓 활용 예정
+  ```
+
+  Interface IUserBasicInfo{
+    user.name : string;
+    group.name : int;
+    groupByGroup.name : int;
+  }
+
+  ```
+
+  - GET /?offset={}&limit={}
+    - 전반적인 회원 정보 가지고옴
+    - Business Logic
+      - querystring 값을 통해 User 정보를 상한선을 지키며 groups,groupByGroup을 조인후 가지고 온다.(model)
+      - offset = 기준점
+      - limit = 출력할 행 숫자
+    - return Array< IUserBasicInfo extends IUser_ReturnData>
+  - GET /filter/human
+    - 인원의 정보를 세밀하게 조회 할 수 있는 기능 , 조회는 누적으로 개발에 주의!!
+    - querystring [("host",boolean) , ("memberIndex",int) , ("phoneNumber",string) , ("offset",int) , ("limit",int)]
+    - Business Logic
+      - querystring에 담긴 데이터의 값을 기반으로 db조인
+    - return Array< IUserBasicInfo extends IUser_ReturnData>
+  - GET /filter/room/< detail:string>
+    - 방에 대한 정보를 통해 인원들 정보 조회
+    - (self,detail) detail을 통해 테이블 명 전송
+    - querystring Groups >> {("minWeight",int),("name",int),("pricing",int),("roomCount",int),("offset",int) , ("limit",int)}
+    - querystring GroupsByGroup >> {("name",int),("createdAt",int),("pricing",int),("offset",int) , ("limit",int)}
+    - Business Logic
+      - pathName을 통한 분리후 서로 다른 querystring을 통해 id 값 찾은 후 users와 join
+    * return Array< IUserBasicInfo extends IUser_ReturnData>
+  - GET /filter/info/< human:string>/< room:string>
+    - 동 또는 호 , 인원 세부정보 조회를 동시에 실행 할 시
+    - Business Logic
+      - human 과 room을 확인후 table명을 분석 >> querystring >> columns값을 알아낸다
+      - querystring Groups {("minWeight",int),("name",int),("pricing",int),("roomCount",int),("offset",int) , ("limit",int)}
+      - querystring GroupByGroup {("name",int),("createdAt",int),("pricing",int),("offset",int) , ("limit",int)}
+      - querystring users [("host",boolean) , ("memberIndex",int) , ("phoneNumber",string) , ("offset",int) , ("limit",int)]
+    - return Array< IUserBasicInfo extends IUser_ReturnData
+  - PATCH /changed/< id:string>
+    - 특정 정보를 선택하여 특정 부분을 수정 전 URL 기억후 다시 요청하여
+    - pathname { ("id",int) } , body(form) 변경된 부분만 전송하여 sql문도 그에 따라 작성
+    - return IUserBasicInfo extends IUser_ReturnData
+  - DELETE /deleted
+    - 특정 정보 row 선택하여 삭제
+    - querystring {"id":int} , offset값을 통해서 삭제후 offset+1의 row데이터를 가지고온다
+    - Business Logic
+      - 해당 id값을 통해 컬럼 삭제
+      - 삭제 후 한 row 선택하여
+    * return IUserBasicInfo extends IUser_ReturnData
+  - GET /outter
+    - 외부 출입자 조회
+    - querystring (("offset",int),("limit",int))
+    - group 과 groupBygroup ,admin 테이블을 통해서 조인을 한 정보 전달
+    - return Array < IUserBasicInfo extends { description : string , createdAt : Date , phoneNumber : string} >
+  - GET /exit
+    - 웹 소켓 활용 예정
 
   ***
 
   - /admin
-    - GET /
-      - 메인 페이지 정보 조회 >> 메인 페이지에 어떤 페이지에 어떤 정보가 보일지 생각후 설계
-      - return {}
     - GET /dashboard
       - 공지사항 정보
-      - return {id:int , title : string , desciption : string , createdAt : Date , updatedAt : Date | NULL, deletedAt :Date | NULL , admin.name : string , admin.email:string}
+      * return Array< ITableBasicInfo extends { admin.name : string , admin.email:string} >
     * PATCH /dashboard
-    * DELETE /dashboard
+      - form(body) { id : int , Title? : string , description? : string , createdAt? : Date , updatedAt? : Date , deletedAt?: Date }
+      - Business Logic
+        - request.form을 통해 key value 확인후 테이블 수정 하는 방법
+      - return ITableBasicInfo extends { admin.name : string , admin.email:string} >> return값이 배열이 아니기 떄문에 프론트에서는 불변성을 지키며 코딩 기존 배열에 [ 19 ]값을 변경해야한다.
+    * DELETE /dashboard/< id:string>&?offset={}
+      - 원하는 row를 지우는 기능 제공
+      * querystring offset , pathname id
+      * Business Logic
+        - (self , id) >> id 값을 통해서 adminDashBoard를 제거 한다.
+        * offset값을 통해서 지운데이터를 매꿔주는 역할을 한다.
+        * 추가적으로 auto Increment를 해야한다.
+      * return ITableBasicInfo extends { admin.name : string , admin.email:string} >> return값이 배열이 아니기 때문에 프론트에서 불별성을 지키며 코딩 >> 기존배열에[ 0 ]값을 변경해야한다.
     * POST /dashboard
+      - 공지사항을 등록 할 수 있는 기능
+      - body form { adminId : int , groupId: string , title : string , description : string , createdAt : Date}
+      - return ITableBasicInfo extends { admin.name : string , admin.email:string}
     - POST /login
       - 로그인
       - body(form) {email : string , password : string}
@@ -179,6 +226,28 @@ interface IVotingInfoTable extends ITableBasicInfo{
           - OutterImages 테이블 저장 >><a href ="https://stackoverflow.com/questions/8589674/sqlalchemy-getting-the-id-of-the-last-record-inserted/8590301">result.inserted_primary_key</a>을 통해 id값 얻기
           - outterUser_images 테이블 저장
         - return { message : string }
+      * /chart
+        - GET /user&group={}
+          - 각 동 인원 / 해당하는 인원수
+          * querystring group
+          - Business Logic
+            - querystring을 통해서 users테이블에 groupid을 조인후 count하여 전송해준다.
+            * 총인원 카운트 , 동마다
+          * return {totalUser : int , groupCount : int}
+        - GET /parking
+          - 각 동 마다 주차 공간 이용 내역
+          * querystring group
+          - Business Logic
+            - querystring을 통해서 users테이블에 groupid을 조인후 count하여 전송해준다.
+          * return {totalparking : int , groupCount : int}
+        - GET /exituser
+          - 출입 현황 날짜별 제공
+          * return Array<{createdAt : Date , : accessMemberConut : int}>
+      * GET /totalcount
+        - 총인원수 , 민원내역 총수 , 주민 투표 총수
+        - Business Logic
+          - users , votingInfo , petitions 테이블 각각 count해서 return
+        - return {totalCount : int , votingInfoConut : int , petitions : int}
 
   ***
 
