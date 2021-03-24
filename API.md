@@ -4,8 +4,8 @@
 
 - PathName vs quryString
 
-  - PathName = 어떤 데이터의 특정해서 보여줘야 할 경우
-  - querystring = 정렬하거나 필터해서 보여줘야 할 경우
+  - PathName = 어떤 데이터의 특정해서 보여줘야 할 경우 ex) path/page
+  - querystring = 정렬하거나 필터해서 보여줘야 할 경우?pv=v1&v2=px
 
 - RESTAPI 관련 포스팅
 - https://digitalbourgeois.tistory.com/53?category=691381
@@ -291,15 +291,25 @@ interface IVotingInfoTable extends ITableBasicInfo{
       - querystring ("kind",string)
       - return Array< IUserBasicInfo extends IPetitionsTable>
 
-    * PATCH /stage/<-stage:string>
+    * PATCH /stage/< id:int>?stage={}
       - 단계 버튼 클릭시 단계 변경
+      * querystring ("stage","") pathname으로 table의 id값을 알아낸다
       - Business Logic
-        - stage pathname과 비교하여 ["접수" ,"서류 검토" , "검토 완료" , "처리중" , "처리완료"] 다음 값을 알아낼
-      * return < IUserBasicInfo extends IPetitionsTable>
+        - stage pathname과 비교하여 배열로 선언 ["접수" ,"서류 검토" , "검토 완료" , "처리중" , "처리완료"] 다음 값을 알아낼
+      * return < IUserBasicInfo extends IPetitionsTable> >> 불변성 지키기
 
   ***
 
+  ```
+  interface IFacilityInfo {
+    user.name :
+  }
+  ```
+
   - /facility (시설관리 카테고리)
+    - GET /toolslist
+      -
+    - GET /roomslist
 
   ***
 
