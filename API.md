@@ -301,15 +301,55 @@ interface IVotingInfoTable extends ITableBasicInfo{
   ***
 
   ```
-  interface IFacilityInfo {
-    user.name :
+  interface IFacilityInfoTable {
+    user.name : string;
+    group.name : int;
+    groupByGroup.name : int;
+    petitions.stage : string;
+    petitions.kind : string;
+    facility_List.admins.name : string;
+
+    createdAt : Date;
+    updatedAt : Date | Null;
+    deletedAt : Date | Null;
+    description : string;
+    quarity: int;
   }
+
+  interface IFacilityToolsListTable{
+    name : string;
+    pricing : int;
+    createdAt : Date;
+    updatedAt : Date | Null;
+    deletedAt : Date | Null;
+    stock? : int;
+  }
+
+  interface IFacilityRoomsListsTable extends IFacilityToolsListTable{
+    title : string;
+    capacity : int
+    employment : int;
+  }
+
   ```
 
   - /facility (시설관리 카테고리)
-    - GET /toolslist
-      -
-    - GET /roomslist
+    - GET /Toollog
+      - 전반적인 이용내역확인
+      - querystring ("limit" , string) , ("offset",string)
+      - return Array< IFacilityInfoTable extends {facilityToolsListTable.name : string , facilityToolsListTable.stock : string }>
+    * GET /Toollog/toolslist
+      - 항목만 조회(시설 기자재)
+      - querystring ("limit" , string) , ("offset",string)
+      - return Array< IFacilityToolsListTable>
+    - GET /rommslog/
+      - 전반적인 이용 내역확인
+      - querystring ("limit" , string) , ("offset",string)
+      - return Array< IFacilityInfoTable extends {facilityRoomsListsTable.name : title , facilityToolsListTable.capacity : int , facilityToolsListTable.employment:int }>
+    * GET /rommslog/roomslist
+      - 항목만 조회(시설 물)
+      - querystring ("limit",string ) , ("offset", string)
+      - return Array< IFacilityRoomsListsTable>
 
   ***
 
