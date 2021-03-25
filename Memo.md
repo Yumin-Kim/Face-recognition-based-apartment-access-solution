@@ -87,7 +87,7 @@
 - 간단하게 조회 하는 기능이 존재하며 단계 변화  
    해당 페이지에 들어가면 요청 이 있는 모델을 modal Toast로 표현  
    RESTAPI 수정 >> 단계 변경에 있어 id값이 정확하게 구현되어 있지 않음  
-   구현 추가 부분 : stage 단계를 통해서 sucessedAt 날짜 insert
+   구현 추가 부분 : stage 단계를 통해서 sucessedAt 날짜 update 수정 날짜를 입력해준다.
 
 * **시설 요청**
 * **신고 요청**

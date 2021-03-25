@@ -89,6 +89,7 @@ interface IUser_adminBasic extends IUserBasicInfo{
 
 interface IPetitionsTable extends ITableBasicInfo {
   stage : string;
+  sucessedAt? : Date;
 }
 
 interface IUserCarTable{
@@ -280,7 +281,7 @@ interface IVotingInfoTable extends ITableBasicInfo{
       - Business Logic
         - 현재 날짜와 비교하여 현재날짜보다 지난 데이터를 가지고 온다.
         - querystring을 통해 조회
-      - return Array<-IvotingUsers>
+      - return Array< IvotingUsers>
 
   ***
 
@@ -296,6 +297,8 @@ interface IVotingInfoTable extends ITableBasicInfo{
       * querystring ("stage","") pathname으로 table의 id값을 알아낸다
       - Business Logic
         - stage pathname과 비교하여 배열로 선언 ["접수" ,"서류 검토" , "검토 완료" , "처리중" , "처리완료"] 다음 값을 알아낼
+        * 해당 단계가 처리완료 단계 이면 수정이 안됨이라고 프론트에서 처리
+        * 해당 index가 검토완료의 index를 가지면 해당 row 테이블 에서 succesdAt현재 날짜를 수정해준다.
       * return < IUserBasicInfo extends IPetitionsTable> >> 불변성 지키기
 
   ***
