@@ -1,13 +1,14 @@
 # 파이썬 폴더 모듈화 하는 방법 : 원하는 폴더 만들고 __init__.py 
 # externals Library
-from flask import Flask , render_template ,redirect
+from flask import render_template ,redirect
 from flask_restx import Resource , Api , Namespace
 
 # Defined Module
 # import faceRecognition
 from route import User,Admin,Registering,Voting,Petitions,Facility,Pricing,UserCar
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] ='mysql://root:wjqrmsrma!wl6311@localhost:3306/facerecognition'
+from model import create_app , db
+app = create_app()
+db.create_all(app=create_app())
 
 #React[SPA]를 위한 Route >> Routing 되기전에 미리 Basic Route 선점
 @app.route("/")

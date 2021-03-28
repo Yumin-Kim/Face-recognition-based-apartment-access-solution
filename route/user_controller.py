@@ -1,12 +1,12 @@
 from flask import request , jsonify , render_template , make_response , redirect
 from flask_restx import Resource, Api, Namespace
-import model
+from model.user_model import insert_userInfo
 
 User = Namespace("User")
 
 @User.route("")
 class UserRoute(Resource):
     def get(self):
-        
-        model.my_function()
+        data = insert_userInfo()
+        print(data)
         return jsonify({"data":"User"})

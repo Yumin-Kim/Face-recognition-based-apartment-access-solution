@@ -159,6 +159,7 @@
 - 전반적인 설계는 종료 했고 mysql + pymysql >> flask_sqlalchemy를 사용하여 ORM 사용하여 가독성 있는 코드 작성
 - MVC패턴으로 구현할 계획임으로 먼저 모듈화 코드부터 작성요함
 - Swagger를 통해서 DTO 작성도 미리 하기
+- socket.IO관련 기능도 찾아 봐야함
 
 ### 세부적인 로직 및 고려 사항
 
