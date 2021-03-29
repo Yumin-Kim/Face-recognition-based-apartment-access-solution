@@ -4,7 +4,7 @@
 
 from route.admin_controller import Admin
 from route.facility_controller import Facility
-from route.petitions_controller import Petitions
+from route.petitions_controller import Petition
 from route.pricing_controller import Pricing
 from route.user_controller import User
 from route.usercar_controller import UserCar

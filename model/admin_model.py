@@ -3,9 +3,10 @@ from datetime import date
 
 from model import db
 
-admin_day = db.Table("admin_day",
-    db.Column("admins_id",db.Integer , db.ForeignKey("admins.id") ,primary_key=True),
-    db.Column("day_id",db.Integer , db.ForeignKey("day.id") ,primary_key=True),
+admin_day_mapping = db.Table("admin_day_mapping",
+    db.Column("admin_id",db.Integer , db.ForeignKey("admins.id") ,primary_key=True),
+    db.Column("day_id",db.Integer , db.ForeignKey("days.id") ,primary_key=True),
+    db.Column("group_id",db.Integer , db.ForeignKey("groups.id") ,primary_key=True),
 )
 
 @dataclass
@@ -14,21 +15,26 @@ class Admins(db.Model):
     name:str
     password:str
     email:str
+    group_id:int
 
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(80),nullable=False)
     password = db.Column(db.String(80),nullable=False)
     email = db.Column(db.String(80),nullable=False)
-    admin_day = db.relationship('Day',secondary=admin_day,backref='admin_day')
+    admin_day_mapping = db.relationship('Days',secondary=admin_day_mapping,backref='admin_day_mapping')
+    group_id = db.Column(db.Integer , db.ForeignKey("groups.id"),nullable=False)
+    accessMembers = db.relationship("AccessMembers",backref="admins",lazy=True)
 
 @dataclass
-class Admindashboard(db.Model):
+class Admindashboards(db.Model):
     id:int
     title:str
     description:str
     createdAt:date
     updatedAt:date
     deletedAt:date
+    admin_id:int
+    group_id:int
 
     id = db.Column(db.Integer , primary_key=True)
     title = db.Column(db.String(80),nullable=False)
@@ -36,14 +42,16 @@ class Admindashboard(db.Model):
     createdAt = db.Column(db.DateTime,nullable=False)
     updatedAt = db.Column(db.DateTime,nullable=True)
     deletedAt = db.Column(db.DateTime,nullable=True)
+    admin_id = db.Column(db.Integer , db.ForeignKey("admins.id"),nullable=False)
+    group_id = db.Column(db.Integer , db.ForeignKey("groups.id"),nullable=False)
 
 @dataclass
-class Day(db.Model):
+class Days(db.Model):
     id:int
-    title:str
+    name:str
 
     id = db.Column(db.Integer , primary_key=True)
-    title = db.Column(db.String(80),nullable=False)
+    name = db.Column(db.String(80),nullable=False)
 
 def insert_adminInfo():
     query = Day(title = "월")
