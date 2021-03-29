@@ -1,14 +1,37 @@
+from dataclasses import dataclass
+from datetime import date
+
 from model import db
-authors = db.Table('authors',
-    db.Column('author_id',db.Integer,db.ForeignKey('author.id'),primary_key=True),
-    db.Column('topic_id',db.Integer,db.ForeignKey('topic.id'),primary_key=True)
-) 
 
-class Author(db.Model):
-    id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(50))
-    topics = db.relationship('Topic',secondary=authors,backref='authors')
 
-class Topic(db.Model):
-    id = db.Column(db.Integer,primary_key=True) 
-    name = db.Column(db.String(50))
+@dataclass
+class UserCarInfo(db.Model):
+    id:int
+    kind:str
+    carCode:str
+    createdAt:date
+    updatedAt:date
+    deletedAt:date
+
+    id = db.Column(db.Integer , primary_key=True)
+    kind = db.Column(db.String(10),nullable=False)
+    carCode = db.Column(db.String(20),nullable=False)
+    createdAt = db.Column(db.DateTime,nullable=False)
+    updatedAt = db.Column(db.DateTime,nullable=True)
+    deletedAt = db.Column(db.DateTime,nullable=True)
+
+@dataclass
+class ParkingInfo(db.Model):
+    id:int
+    space:str
+    valid:bool
+    startTime:date
+    EndTime:date
+    specificSpace:bool
+
+    id = db.Column(db.Integer , primary_key=True)
+    space = db.Column(db.String(20),nullable=False)
+    valid = db.Column(db.Boolean,nullable=False)
+    startTime = db.Column(db.DateTime,nullable=False)
+    EndTime = db.Column(db.DateTime,nullable=False)
+    specificSpace = db.Column(db.Boolean,nullable=False)

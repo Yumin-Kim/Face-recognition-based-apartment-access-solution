@@ -10,11 +10,13 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:wjqrmsrma!wl6311@localhost:3306/facerecognition"
+    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:wjqrmsrma!wl6311@localhost:3306/facerecognition?charset=utf8"
     app.config['MYSQL_DATABASE_CHARSET'] = 'utf8mb4' # utf-8 인코딩
     from model.user_model import Users
     from model.admin_model import Admins,Day,Admindashboard,admin_day
+    # db.init_app(app)
     db.init_app(app)
+    # db.create_all(app=create_app())
     return app
 
 class Test_AlchemyEncoder(json.JSONEncoder):

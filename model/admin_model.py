@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from datetime import date
 
 from model import db
-from sqlalchemy import exc
 
 admin_day = db.Table("admin_day",
     db.Column("admins_id",db.Integer , db.ForeignKey("admins.id") ,primary_key=True),
@@ -46,4 +45,9 @@ class Day(db.Model):
     id = db.Column(db.Integer , primary_key=True)
     title = db.Column(db.String(80),nullable=False)
 
+def insert_adminInfo():
+    query = Day(title = "월")
+    db.session.add(query)
+    db.session.commit()
+    return Day.query.all()
 
