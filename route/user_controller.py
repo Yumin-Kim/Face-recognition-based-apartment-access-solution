@@ -10,10 +10,9 @@ userSearchQueryString = { "host":"boolean : 세대주" , "memeberIndex":"int : �
 userGroupSearchString = {"minWeight":"int : 최소 면적 ","name":"int : 동","pricing": "int","roomCount":"int"}
 userGroupByGroupSearchString = {"name":"int","createdAt":"Date","pricing":"int","offset":"int", "limit":"int"}
 basicReturn = {"test" : "준비중입니다"}
-
 @User.route("")
 @User.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
-			 params=docBasicQueryString)
+			 )
 class UserRoute(Resource):
     # test Code
     def get(self):
@@ -28,21 +27,21 @@ class UserRoute(Resource):
 
 @User.route("/filter/human")
 @User.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
-			 params=docBasicQueryString | userSearchQueryString)
+			  )
 class UserResearchRoute(Resource):
     def get(self):
         return jsonify(basicReturn)
 
 @User.route("/filter/room/<string:tableName>")
 @User.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
-			 params=docBasicQueryString | userGroupByGroupSearchString | userGroupSearchString)
+			  )
 class UserGroupResearchRoute(Resource):
     def get(self,tableName):
         return jsonify(basicReturn)
 
 @User.route("/filter/info/<string:tableName_1>/<string:tableName_2>")
 @User.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
-			 params=docBasicQueryString | userGroupByGroupSearchString | userGroupSearchString | userSearchQueryString)
+			  )
 class MultiUserGroupResearchRoute(Resource):
     def get(self,tableName_1,tableName_2):
         return jsonify(basicReturn)
@@ -57,14 +56,14 @@ class UserUpdateRoute(Resource):
 
 @User.route("/deleted")
 @User.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
-			 params={"id":"int : 원하는 row 삭제"})
+			 )
 class UserDeleteRoute(Resource):
     def delete(self):
         return jsonify(basicReturn)
 
 @User.route("/outter")
 @User.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
-			 params=docBasicQueryString)
+			 )
 class OutterUserResearchRoute(Resource):
     def get(self):
         return jsonify(basicReturn)

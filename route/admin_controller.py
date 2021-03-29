@@ -1,12 +1,14 @@
 from flask import request , jsonify , render_template , make_response , redirect
 from flask_restx import Resource, Api, Namespace
+from model.admin_model import insert_adminInfo
 
 Admin = Namespace("Admin")
 
 @Admin.route("")
 class AdminRoute(Resource):
     def get(self):
-        return jsonify({"data":"Admin"})
+        insert_adminInfo()
+        return jsonify(insert_adminInfo())
 
 @Admin.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
 			 )

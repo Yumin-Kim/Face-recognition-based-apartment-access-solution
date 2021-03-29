@@ -12,14 +12,14 @@ class UserCarRoute(Resource):
 
 @UserCar.route("/filter")
 @UserCar.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
-			 params=docBasicQueryString | {"carCode":"string" , "createdAt":"stirng -> Date", "kind":"string" , "group":"string" , "groupByGroup":"string" , "user" : "string"})
+			 params= {"carCode":"string" , "createdAt":"stirng -> Date", "kind":"string" , "group":"string" , "groupByGroup":"string" , "user" : "string"})
 class UserCarFilterRoute(Resource):
     def get(self):
         return jsonify({"data":"UserCar"})
         
 @UserCar.route("/filter/multi")
 @UserCar.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
-			 params=docBasicQueryString| {"carCode":"string" , "createdAt":"stirng -> Date", "kind":"string" , "group":"string" , "groupByGroup":"string" , "user" : "string"})
+			 params= {"carCode":"string" , "createdAt":"stirng -> Date", "kind":"string" , "group":"string" , "groupByGroup":"string" , "user" : "string"})
 class UserCarMultiFilterRoute(Resource):
     def get(self):
         return jsonify({"data":"UserCar"})

@@ -6,7 +6,7 @@ Petitions = Namespace("Petitions")
 
 @Petitions.route("")
 @Petitions.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error' }, 
-			 params=docBasicQueryString |{ "kind" : "string : 시설 신고 기타" })
+			 params={ "kind" : "string : 시설 신고 기타" })
 class PetitionsRoute(Resource):
     def get(self):
         return jsonify({"data":"Petitions"})

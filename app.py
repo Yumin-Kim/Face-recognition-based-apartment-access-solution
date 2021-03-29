@@ -1,14 +1,20 @@
 # 파이썬 폴더 모듈화 하는 방법 : 원하는 폴더 만들고 __init__.py 
 # externals Library
-from flask import render_template ,redirect
+from flask import render_template ,redirect ,Flask
 from flask_restx import Resource , Api , Namespace
 
 # Defined Module
 # import faceRecognition
 from route import User,Admin,Registering,Voting,Petitions,Facility,Pricing,UserCar
 from model import create_app , db
+# app = Flask(__name__)
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:wjqrmsrma!wl6311@localhost:3306/facerecognition?charset=utf8"
+# app.config['MYSQL_DATABASE_CHARSET'] = 'utf8mb4' # utf-8 인코딩
 app = create_app()
 db.create_all(app=create_app())
+
+# table 만드는 코드 서버 로딩하는 코드 분리하기
 
 #React[SPA]를 위한 Route >> Routing 되기전에 미리 Basic Route 선점
 @app.route("/")
