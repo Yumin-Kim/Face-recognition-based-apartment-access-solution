@@ -1,4 +1,4 @@
-# Android에서 얼굴 인식 후 서버 구축 단계
+# Android에서 얼굴 인식 판별 통한 아파트 거주자 관리 서버 구축 및 React활용한 사이트 개발 
 
 - **<a href = "https://github.com/Yumin-Kim/RTSP_Node.js_Server">해당 링크</a>README를 이어서 작성중이다**
 
