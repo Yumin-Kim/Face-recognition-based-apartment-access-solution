@@ -1,0 +1,4 @@
+#Wed Aug 19 23:18:14 KST 2020
+base.0=C\:\\android\\android-BluetoothLeGatt-master\\Application\\build\\intermediates\\dex\\debug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

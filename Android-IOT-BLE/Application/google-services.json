@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "520682530616",
+    "firebase_url": "https://iotbasicproject.firebaseio.com",
+    "project_id": "iotbasicproject",
+    "storage_bucket": "iotbasicproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520682530616:android:3f0c06a581a108563943cd",
+        "android_client_info": {
+          "package_name": "com.example.android.bluetoothlegatt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520682530616-2pv7uv1ejn67l279c0h86tncm3c04gob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAEszVDBnKXo0BgbDGy9lxj4dSOK_FjHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520682530616-2pv7uv1ejn67l279c0h86tncm3c04gob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
