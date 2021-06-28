@@ -1,0 +1,5 @@
+config.py
+/data/*.jpg
+/data/*.png
+__pycache__
+static/images/*
